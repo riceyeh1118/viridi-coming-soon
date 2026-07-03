@@ -1,331 +1,265 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-Hant-TW">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Viridi｜Connection, Cycle, Care</title>
   <meta name="description" content="Viridi 以內外循環為核心精神，關心人如何在日常生活與內在世界之間，重新建立更有意識的連結。" />
-  <title>Viridi｜Coming Soon</title>
+  <meta property="og:title" content="Viridi｜Connection, Cycle, Care" />
+  <meta property="og:description" content="Viridi 正式網站整理中。" />
+  <meta property="og:type" content="website" />
   <style>
     :root {
-      --bg: #f7f3ea;
-      --paper: #fffaf0;
-      --ink: #25251f;
-      --muted: #6f6a5f;
-      --green: #4f6f55;
-      --gold: #b99a5b;
-      --line: rgba(37, 37, 31, 0.16);
+      --bg: #e9f2ec;
+      --paper: rgba(255, 255, 255, 0.62);
+      --paper-strong: rgba(255, 255, 255, 0.78);
+      --ink: #426b61;
+      --ink-soft: #668a82;
+      --gold: #b89f67;
+      --line: rgba(66, 107, 97, 0.20);
+      --shadow: 0 18px 55px rgba(59, 96, 85, 0.12);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
       min-height: 100vh;
-      background:
-        radial-gradient(circle at top left, rgba(185, 154, 91, 0.18), transparent 32rem),
-        radial-gradient(circle at bottom right, rgba(79, 111, 85, 0.16), transparent 28rem),
-        var(--bg);
       color: var(--ink);
-      font-family: "Noto Serif TC", "Songti TC", "PMingLiU", serif;
-      line-height: 1.95;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.80), transparent 34rem),
+        radial-gradient(circle at bottom right, rgba(184,159,103,0.18), transparent 28rem),
+        var(--bg);
+      font-family: "Noto Serif TC", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", serif;
+      line-height: 1.9;
       letter-spacing: 0.04em;
     }
 
-    main {
-      width: min(920px, calc(100% - 32px));
+    .wrap {
+      width: min(980px, calc(100% - 40px));
       margin: 0 auto;
-      padding: 56px 0;
+      padding: 56px 0 48px;
     }
 
-    .card {
-      position: relative;
-      overflow: hidden;
-      background: rgba(255, 250, 240, 0.82);
+    .hero {
+      text-align: center;
+      padding: 46px 28px 40px;
       border: 1px solid var(--line);
       border-radius: 30px;
-      padding: clamp(32px, 6vw, 72px);
-      box-shadow: 0 24px 80px rgba(37, 37, 31, 0.08);
-      backdrop-filter: blur(8px);
-    }
-
-    .card::before,
-    .card::after {
-      content: "";
-      position: absolute;
-      border: 1px solid rgba(185, 154, 91, 0.38);
-      border-radius: 999px;
-      pointer-events: none;
-    }
-
-    .card::before {
-      width: 260px;
-      height: 260px;
-      top: -92px;
-      right: -78px;
-    }
-
-    .card::after {
-      width: 180px;
-      height: 180px;
-      bottom: -62px;
-      left: -58px;
-      border-color: rgba(79, 111, 85, 0.28);
-    }
-
-    .brand {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      margin-bottom: 52px;
-    }
-
-    .eyebrow {
-      color: var(--gold);
-      font-size: 0.78rem;
-      letter-spacing: 0.34em;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(3.2rem, 11vw, 7.2rem);
-      line-height: 1;
-      letter-spacing: 0.13em;
-      font-weight: 500;
-      color: var(--green);
-    }
-
-    .subtitle {
-      margin: 22px auto 0;
-      max-width: 600px;
-      color: var(--muted);
-      font-size: 1rem;
-    }
-
-    .intro {
-      position: relative;
-      z-index: 1;
-      max-width: 680px;
-      margin: 0 auto;
-      font-size: clamp(1.02rem, 2vw, 1.18rem);
-    }
-
-    .intro p {
-      margin: 0 0 1.15em;
-    }
-
-    .question {
-      color: var(--green);
-      font-size: clamp(1.2rem, 3vw, 1.45rem);
-      line-height: 1.75;
-      margin-top: 2.2em;
-    }
-
-    .section-divider {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      height: 1px;
-      background: var(--line);
-      margin: 52px 0;
-    }
-
-    .section-divider::before {
-      content: "✦";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
       background: var(--paper);
-      color: var(--gold);
-      padding: 0 18px;
-      font-size: 0.9rem;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
     }
 
-    .statement,
-    .paths,
-    .coming-soon {
-      position: relative;
-      z-index: 1;
+    .main-logo {
+      width: min(280px, 78vw);
+      height: auto;
+      display: block;
+      margin: 0 auto 28px;
+    }
+
+    .lead {
       max-width: 720px;
       margin: 0 auto;
+      font-size: 1.06rem;
     }
 
     .keywords {
-      margin-top: 18px;
-      color: var(--green);
-      font-size: 1.05rem;
+      margin-top: 22px;
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+    }
+
+    .divider {
+      width: 72px;
+      height: 1px;
+      margin: 34px auto;
+      background: var(--gold);
+      opacity: 0.75;
+    }
+
+    .manifesto {
+      margin-top: 28px;
+      padding: 42px clamp(22px, 5vw, 70px);
+      border-radius: 30px;
+      background: var(--paper-strong);
+      border: 1px solid var(--line);
+      box-shadow: 0 12px 36px rgba(59, 96, 85, 0.08);
       text-align: center;
     }
 
-    .keywords span {
-      display: block;
-      color: var(--muted);
-      font-size: 0.9rem;
+    .manifesto h1 {
+      margin: 0 0 26px;
+      font-weight: 400;
+      font-size: clamp(1.35rem, 3vw, 2rem);
       letter-spacing: 0.12em;
-      margin-top: 4px;
     }
 
-    .paths {
+    .manifesto p {
+      margin: 0.82em 0;
+      font-size: clamp(1rem, 2vw, 1.12rem);
+    }
+
+    .brands {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-      margin-top: 34px;
+      gap: 22px;
+      margin-top: 28px;
     }
 
-    .path-card {
+    .brand-card {
+      min-height: 330px;
+      padding: 34px 26px 30px;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.58);
       border: 1px solid var(--line);
-      border-radius: 22px;
-      padding: 26px 24px;
-      background: rgba(255, 255, 255, 0.38);
-    }
-
-    .path-card h2 {
-      margin: 0 0 12px;
-      color: var(--green);
-      font-size: 1.35rem;
-      line-height: 1.35;
-      letter-spacing: 0.08em;
-      font-weight: 500;
-    }
-
-    .path-card p {
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .path-card strong {
-      display: block;
-      margin-top: 16px;
-      color: var(--ink);
-      font-weight: 500;
-    }
-
-    .coming-soon {
       text-align: center;
-      margin-top: 48px;
+      box-shadow: 0 10px 32px rgba(59, 96, 85, 0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
-    .coming-soon h2 {
+    .brand-card img {
+      width: min(210px, 70%);
+      height: auto;
+      display: block;
+      margin: 0 auto 22px;
+    }
+
+    .brand-card h2 {
       margin: 0 0 8px;
-      color: var(--green);
-      font-size: 1.45rem;
-      font-weight: 500;
+      font-weight: 400;
+      font-size: 1.18rem;
+      letter-spacing: 0.10em;
     }
 
-    .email {
-      display: inline-block;
-      margin-top: 18px;
-      color: var(--ink);
-      text-decoration: none;
-      border-bottom: 1px solid var(--gold);
-      padding-bottom: 2px;
+    .brand-card p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 0.98rem;
     }
 
-    footer {
+    .coming {
       margin-top: 28px;
       text-align: center;
-      color: var(--muted);
-      font-size: 0.82rem;
-      letter-spacing: 0.14em;
+      padding: 32px 22px;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.42);
     }
 
-    @media (max-width: 700px) {
-      main {
-        width: min(100% - 20px, 920px);
-        padding: 16px 0;
+    .coming h2 {
+      margin: 0 0 10px;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      font-size: 1.15rem;
+    }
+
+    .coming p { margin: 0.35em 0; }
+
+    a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(184, 159, 103, 0.72);
+    }
+
+    a:hover { color: #2f5c52; }
+
+    footer {
+      text-align: center;
+      color: var(--ink-soft);
+      font-size: 0.85rem;
+      padding: 26px 0 0;
+    }
+
+    @media (max-width: 760px) {
+      .wrap {
+        width: min(100% - 28px, 980px);
+        padding-top: 28px;
       }
 
-      .card {
+      .hero,
+      .manifesto,
+      .coming {
         border-radius: 22px;
-        padding: 30px 22px;
       }
 
-      .brand {
-        margin-bottom: 36px;
-      }
-
-      h1 {
-        letter-spacing: 0.08em;
-      }
-
-      .paths {
+      .brands {
         grid-template-columns: 1fr;
+      }
+
+      .brand-card {
+        min-height: 280px;
       }
 
       body {
         line-height: 1.85;
-        letter-spacing: 0.03em;
       }
     }
   </style>
 </head>
 <body>
-  <main>
-    <section class="card" aria-label="Viridi Coming Soon">
-      <header class="brand">
-        <div class="eyebrow">Connection · Cycle · Care</div>
-        <h1>VIRIDI</h1>
-        <p class="subtitle">內外循環｜有意識的生活與內在探索</p>
-      </header>
-
-      <section class="intro">
-        <p class="question">你是否感覺到</p>
-        <p>明明時常照顧自己，卻還是覺得不太認識自己？</p>
-        <p>明明想改變什麼，卻不知道從哪裡開始？</p>
-
-        <p class="question">你是否想過</p>
-        <p>也許我們的內在世界與外在世界其實從未真正分開？</p>
-        <p>我們太習慣把「向內」和「向外」當成分開的兩件事。</p>
-        <p>你如何對待自己的情緒，也將如何對待身邊的人與事；</p>
-        <p>你每天做的那些小選擇，也在悄悄塑造你與世界的關係。</p>
-        <p>認識自己，不是為了困在自己，</p>
-        <p>而是讓那份覺知，能夠向外流動。</p>
-        <p>擴展意識，不是為了追求某種靈性高度，</p>
-        <p>而是讓人與人、人與環境之間的關係，變得更加有意識。</p>
-        <p>當你重新看見這些原本就存在的連結，</p>
-        <p>新的生活方式才有機會從這裡長出來，</p>
-        <p>成為每一天都在發生的事。</p>
-      </section>
-
-      <div class="section-divider" aria-hidden="true"></div>
-
-      <section class="statement">
-        <p>Viridi 以「內外循環」為核心精神，關心人如何在日常生活與內在世界之間，重新建立更有意識的連結。</p>
-        <p class="keywords">連結、循環、珍惜<span>Connection, Cycle, Care</span></p>
-      </section>
-
-      <section class="paths" aria-label="Viridi paths">
-        <article class="path-card">
-          <h2>Viridi Daily</h2>
-          <p>有意識的生活實踐。</p>
-          <strong>低耗、循環、共好</strong>
-          <p>Reduce, Cycle, Shared Good</p>
-        </article>
-
-        <article class="path-card">
-          <h2>Inner Viridi</h2>
-          <p>有覺知的內在探索。</p>
-          <strong>看見、連結、流動</strong>
-          <p>Seeing, Connection, Flow</p>
-        </article>
-      </section>
-
-      <section class="coming-soon">
-        <h2>Viridi 正式網站整理中</h2>
-        <p>Coming Soon</p>
-        <a class="email" href="mailto:viridilife@gmail.com">viridilife@gmail.com</a>
-      </section>
+  <main class="wrap">
+    <section class="hero" aria-label="Viridi brand introduction">
+      <img class="main-logo" src="assets/viridi-logo.png" alt="Viridi Logo" />
+      <p class="lead">
+        Viridi 以「內外循環」為核心精神，關心人如何在日常生活與內在世界之間，重新建立更有意識的連結。
+      </p>
+      <p class="keywords">連結、循環、珍惜｜Connection, Cycle, Care</p>
     </section>
 
-    <footer>© Viridi</footer>
+    <section class="manifesto" aria-label="Viridi manifesto">
+      <h1>你是否感覺到⋯⋯</h1>
+
+      <p>明明時常照顧自己，卻還是覺得不太認識自己？</p>
+      <p>明明想改變什麼，卻不知道從哪裡開始？</p>
+
+      <div class="divider" aria-hidden="true"></div>
+
+      <p>你是否想過，</p>
+      <p>也許我們的內在世界與外在世界其實從未真正分開？</p>
+      <p>我們太習慣把「向內」和「向外」當成分開的兩件事。</p>
+      <p>你如何對待自己的情緒，也將如何對待身邊的人與事；</p>
+      <p>你每天做的那些小選擇，也在悄悄塑造你與世界的關係。</p>
+
+      <div class="divider" aria-hidden="true"></div>
+
+      <p>認識自己，不是為了困在自己，</p>
+      <p>而是讓那份覺知，能夠向外流動。</p>
+      <p>擴展意識，不是為了追求某種靈性高度，</p>
+      <p>而是讓人與人、人與環境之間的關係，變得更加有意識。</p>
+      <p>當你重新看見這些原本就存在的連結，</p>
+      <p>新的生活方式才有機會從這裡長出來，</p>
+      <p>成為每一天都在發生的事。</p>
+    </section>
+
+    <section class="brands" aria-label="Viridi brand entrances">
+      <article class="brand-card">
+        <img src="assets/viridi-daily-logo.png" alt="Viridi Daily Logo" />
+        <h2>有意識的生活實踐</h2>
+        <p>低耗、循環、共好｜Reduce, Cycle, Shared Good</p>
+      </article>
+
+      <article class="brand-card">
+        <img src="assets/inner-viridi-logo.png" alt="Inner Viridi Logo" />
+        <h2>有覺知的內在探索</h2>
+        <p>看見、連結、流動｜Seeing, Connection, Flow</p>
+      </article>
+    </section>
+
+    <section class="coming" aria-label="Coming soon">
+      <h2>正式網站整理中｜Coming Soon</h2>
+      <p>聯絡信箱：<a href="mailto:viridilife@gmail.com">viridilife@gmail.com</a></p>
+    </section>
+
+    <footer>
+      © Viridi. Connection, Cycle, Care.
+    </footer>
   </main>
 </body>
 </html>
